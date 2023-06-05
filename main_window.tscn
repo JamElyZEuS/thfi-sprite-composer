@@ -1,0 +1,1143 @@
+[gd_scene load_steps=15 format=3 uid="uid://itq5slssrl44"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_ntywo"]
+[ext_resource type="PackedScene" uid="uid://dgktewtoqowo0" path="res://sprite_viewer.tscn" id="1_w5ipb"]
+[ext_resource type="Script" path="res://CodeViewLabel.gd" id="2_y7dgj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6yigg"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.00392157, 0.00392157, 0, 0.101961)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0nkp"]
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.0980392, 0.105882, 0.215686, 1)
+border_color = Color(0.0526009, 0.0554286, 0.103702, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4uswq"]
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.0941176, 0.0980392, 0.164706, 1)
+border_color = Color(0.0526009, 0.0554286, 0.103702, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajg0s"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.054902, 0.054902, 0.0745098, 0.396078)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7a3p2"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0941176, 0.0980392, 0.164706, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_detail = 6
+
+[sub_resource type="Theme" id="Theme_8le4k"]
+Button/styles/disabled = SubResource("StyleBoxFlat_6yigg")
+Button/styles/hover = SubResource("StyleBoxFlat_o0nkp")
+Button/styles/normal = SubResource("StyleBoxFlat_4uswq")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_ajg0s")
+Panel/styles/panel = SubResource("StyleBoxFlat_7a3p2")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5yixj"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_my4or"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w6nbr"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+
+[sub_resource type="SystemFont" id="SystemFont_4mk5w"]
+font_names = PackedStringArray("Cascadia Mono", "Consolas")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kesjh"]
+
+[node name="MainWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8le4k")
+script = ExtResource("1_ntywo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PreviewPanel" type="Panel" parent="HBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpriteViewer" parent="HBoxContainer/PreviewPanel" instance=ExtResource("1_w5ipb")]
+layout_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
+
+[node name="FolderNameLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "FOL_NAME"
+
+[node name="FolderName" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_next = NodePath("../FileCharName")
+
+[node name="FileCharNameLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "CHAR_NAME"
+
+[node name="FileCharName" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_next = NodePath("../../ScrollContainer/SpriteSelector/Layer0/VBoxContainer/SpriteName")
+focus_previous = NodePath("../FolderName")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 0
+
+[node name="SpriteSelector" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Layer0" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector"]
+clip_contents = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IncludeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer0/VBoxContainer"]
+layout_mode = 2
+disabled = true
+
+[node name="LayerName" type="TextEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer0/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.807843, 0.807843, 0.807843, 1)
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5yixj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_my4or")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_w6nbr")
+placeholder_text = "Layer 0"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+caret_multiple = false
+
+[node name="CodeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer0/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "CODE_CH"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer0/VBoxContainer"]
+layout_mode = 2
+text = "EXACT_CH"
+clip_text = true
+
+[node name="SpriteName" type="LineEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer0/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../../../Layer1/VBoxContainer/SpriteName")
+theme_override_font_sizes/font_size = 12
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer0/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SpriteNum" type="Label" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer0/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer0/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="Layer1" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector"]
+clip_contents = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IncludeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer1/VBoxContainer"]
+layout_mode = 2
+disabled = true
+
+[node name="LayerName" type="TextEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer1/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.807843, 0.807843, 0.807843, 1)
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5yixj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_my4or")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_w6nbr")
+placeholder_text = "Layer 1"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+caret_multiple = false
+
+[node name="CodeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer1/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "CODE_CH"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer1/VBoxContainer"]
+layout_mode = 2
+text = "EXACT_CH"
+clip_text = true
+
+[node name="SpriteName" type="LineEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer1/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../../../Layer2/VBoxContainer/SpriteName")
+focus_previous = NodePath("../../../Layer0/VBoxContainer/SpriteName")
+theme_override_font_sizes/font_size = 12
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer1/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SpriteNum" type="Label" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer1/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer1/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="Layer2" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector"]
+clip_contents = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IncludeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer2/VBoxContainer"]
+layout_mode = 2
+disabled = true
+
+[node name="LayerName" type="TextEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.807843, 0.807843, 0.807843, 1)
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5yixj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_my4or")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_w6nbr")
+placeholder_text = "Layer 2"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+caret_multiple = false
+
+[node name="CodeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer2/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "CODE_CH"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer2/VBoxContainer"]
+layout_mode = 2
+text = "EXACT_CH"
+clip_text = true
+
+[node name="SpriteName" type="LineEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer2/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../../../Layer3/VBoxContainer/SpriteName")
+focus_previous = NodePath("../../../Layer1/VBoxContainer/SpriteName")
+theme_override_font_sizes/font_size = 12
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer2/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SpriteNum" type="Label" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer2/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer2/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="Layer3" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector"]
+clip_contents = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IncludeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer3/VBoxContainer"]
+layout_mode = 2
+disabled = true
+
+[node name="LayerName" type="TextEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.807843, 0.807843, 0.807843, 1)
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5yixj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_my4or")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_w6nbr")
+placeholder_text = "Body"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+caret_multiple = false
+
+[node name="CodeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer3/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "CODE_CH"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer3/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "EXACT_CH"
+clip_text = true
+
+[node name="SpriteName" type="LineEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer3/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../../../Layer4/VBoxContainer/SpriteName")
+focus_previous = NodePath("../../../Layer2/VBoxContainer/SpriteName")
+theme_override_font_sizes/font_size = 12
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer3/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SpriteNum" type="Label" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer3/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer3/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="Layer4" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector"]
+clip_contents = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IncludeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer4/VBoxContainer"]
+layout_mode = 2
+disabled = true
+
+[node name="LayerName" type="TextEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer4/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.807843, 0.807843, 0.807843, 1)
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5yixj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_my4or")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_w6nbr")
+placeholder_text = "Brows"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+caret_multiple = false
+
+[node name="CodeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer4/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "CODE_CH"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer4/VBoxContainer"]
+layout_mode = 2
+text = "EXACT_CH"
+clip_text = true
+
+[node name="SpriteName" type="LineEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer4/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../../../Layer5/VBoxContainer/SpriteName")
+focus_previous = NodePath("../../../Layer3/VBoxContainer/SpriteName")
+theme_override_font_sizes/font_size = 12
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer4/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SpriteNum" type="Label" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer4/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer4/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="Layer5" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector"]
+clip_contents = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IncludeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer5/VBoxContainer"]
+layout_mode = 2
+disabled = true
+
+[node name="LayerName" type="TextEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer5/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.807843, 0.807843, 0.807843, 1)
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5yixj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_my4or")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_w6nbr")
+placeholder_text = "Eyes"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+caret_multiple = false
+
+[node name="CodeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer5/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "CODE_CH"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer5/VBoxContainer"]
+layout_mode = 2
+text = "EXACT_CH"
+clip_text = true
+
+[node name="SpriteName" type="LineEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer5/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../../../Layer6/VBoxContainer/SpriteName")
+focus_previous = NodePath("../../../Layer4/VBoxContainer/SpriteName")
+theme_override_font_sizes/font_size = 12
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer5/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SpriteNum" type="Label" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer5/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer5/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="Layer6" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector"]
+clip_contents = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IncludeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer6/VBoxContainer"]
+layout_mode = 2
+disabled = true
+
+[node name="LayerName" type="TextEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer6/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.807843, 0.807843, 0.807843, 1)
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5yixj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_my4or")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_w6nbr")
+placeholder_text = "Mouth"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+caret_multiple = false
+
+[node name="CodeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer6/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "CODE_CH"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer6/VBoxContainer"]
+layout_mode = 2
+text = "EXACT_CH"
+clip_text = true
+
+[node name="SpriteName" type="LineEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer6/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../../../Layer7/VBoxContainer/SpriteName")
+focus_previous = NodePath("../../../Layer5/VBoxContainer/SpriteName")
+theme_override_font_sizes/font_size = 12
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer6/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SpriteNum" type="Label" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer6/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer6/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="Layer7" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector"]
+clip_contents = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IncludeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer7/VBoxContainer"]
+layout_mode = 2
+disabled = true
+
+[node name="LayerName" type="TextEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer7/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.807843, 0.807843, 0.807843, 1)
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5yixj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_my4or")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_w6nbr")
+placeholder_text = "Left Arm"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+caret_multiple = false
+
+[node name="CodeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer7/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "CODE_CH"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer7/VBoxContainer"]
+layout_mode = 2
+text = "EXACT_CH"
+clip_text = true
+
+[node name="SpriteName" type="LineEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer7/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../../../Layer8/VBoxContainer/SpriteName")
+focus_previous = NodePath("../../../Layer6/VBoxContainer/SpriteName")
+theme_override_font_sizes/font_size = 12
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer7/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SpriteNum" type="Label" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer7/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer7/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="Layer8" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector"]
+clip_contents = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IncludeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer8/VBoxContainer"]
+layout_mode = 2
+disabled = true
+
+[node name="LayerName" type="TextEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer8/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.807843, 0.807843, 0.807843, 1)
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5yixj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_my4or")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_w6nbr")
+placeholder_text = "Right Arm"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+caret_multiple = false
+
+[node name="CodeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer8/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "CODE_CH"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer8/VBoxContainer"]
+layout_mode = 2
+text = "EXACT_CH"
+clip_text = true
+
+[node name="SpriteName" type="LineEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer8/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../../../Layer9/VBoxContainer/SpriteName")
+focus_previous = NodePath("../../../Layer7/VBoxContainer/SpriteName")
+theme_override_font_sizes/font_size = 12
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer8/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SpriteNum" type="Label" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer8/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer8/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="Layer9" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector"]
+clip_contents = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IncludeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer9/VBoxContainer"]
+layout_mode = 2
+disabled = true
+
+[node name="LayerName" type="TextEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer9/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.807843, 0.807843, 0.807843, 1)
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5yixj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_my4or")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_w6nbr")
+placeholder_text = "Layer 9"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+caret_multiple = false
+
+[node name="CodeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer9/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "CODE_CH"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer9/VBoxContainer"]
+layout_mode = 2
+text = "EXACT_CH"
+clip_text = true
+
+[node name="SpriteName" type="LineEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer9/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../../../Layer10/VBoxContainer/SpriteName")
+focus_previous = NodePath("../../../Layer8/VBoxContainer/SpriteName")
+theme_override_font_sizes/font_size = 12
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer9/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SpriteNum" type="Label" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer9/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer9/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="Layer10" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector"]
+clip_contents = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer10"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IncludeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer10/VBoxContainer"]
+layout_mode = 2
+disabled = true
+
+[node name="LayerName" type="TextEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer10/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.807843, 0.807843, 0.807843, 1)
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5yixj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_my4or")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_w6nbr")
+placeholder_text = "Layer 10"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+caret_multiple = false
+
+[node name="CodeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer10/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "CODE_CH"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer10/VBoxContainer"]
+layout_mode = 2
+text = "EXACT_CH"
+clip_text = true
+
+[node name="SpriteName" type="LineEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer10/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../../../Layer11/VBoxContainer/SpriteName")
+focus_previous = NodePath("../../../Layer9/VBoxContainer/SpriteName")
+theme_override_font_sizes/font_size = 12
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer10/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SpriteNum" type="Label" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer10/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer10/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="Layer11" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector"]
+clip_contents = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer11"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IncludeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer11/VBoxContainer"]
+layout_mode = 2
+disabled = true
+
+[node name="LayerName" type="TextEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer11/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.807843, 0.807843, 0.807843, 1)
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5yixj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_my4or")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_w6nbr")
+placeholder_text = "Layer 11"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+caret_multiple = false
+
+[node name="CodeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer11/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "CODE_CH"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer11/VBoxContainer"]
+layout_mode = 2
+text = "EXACT_CH"
+clip_text = true
+
+[node name="SpriteName" type="LineEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer11/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../../../Layer12/VBoxContainer/SpriteName")
+focus_previous = NodePath("../../../Layer10/VBoxContainer/SpriteName")
+theme_override_font_sizes/font_size = 12
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer11/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SpriteNum" type="Label" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer11/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer11/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="Layer12" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector"]
+clip_contents = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer12"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IncludeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer12/VBoxContainer"]
+layout_mode = 2
+disabled = true
+
+[node name="LayerName" type="TextEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer12/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.807843, 0.807843, 0.807843, 1)
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5yixj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_my4or")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_w6nbr")
+placeholder_text = "Layer 12"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+caret_multiple = false
+
+[node name="CodeCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer12/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "CODE_CH"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer12/VBoxContainer"]
+layout_mode = 2
+text = "EXACT_CH"
+clip_text = true
+
+[node name="SpriteName" type="LineEdit" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer12/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../../../../../SetArgs")
+focus_previous = NodePath("../../../Layer11/VBoxContainer/SpriteName")
+theme_override_font_sizes/font_size = 12
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer12/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SpriteNum" type="Label" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer12/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer12/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="SetArgs" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "SET_ARGS"
+
+[node name="CodeView" type="Panel" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CodeViewLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/CodeView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+focus_mode = 2
+theme_override_fonts/mono_font = SubResource("SystemFont_4mk5w")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kesjh")
+bbcode_enabled = true
+text = "[code][url]"
+fit_content = true
+meta_underlined = false
+selection_enabled = true
+script = ExtResource("2_y7dgj")
+
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer0/VBoxContainer/IncludeCheckbox" to="." method="_on_include_checkbox_toggled" binds= [0]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer0/VBoxContainer/CodeCheckbox" to="." method="_on_code_checkbox_toggled" binds= [0]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer0/VBoxContainer/BackButton" to="." method="_on_back_button_pressed" binds= [0]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer0/VBoxContainer/NextButton" to="." method="_on_next_button_pressed" binds= [0]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer1/VBoxContainer/IncludeCheckbox" to="." method="_on_include_checkbox_toggled" binds= [1]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer1/VBoxContainer/CodeCheckbox" to="." method="_on_code_checkbox_toggled" binds= [1]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer1/VBoxContainer/BackButton" to="." method="_on_back_button_pressed" binds= [1]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer1/VBoxContainer/NextButton" to="." method="_on_next_button_pressed" binds= [1]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer2/VBoxContainer/IncludeCheckbox" to="." method="_on_include_checkbox_toggled" binds= [2]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer2/VBoxContainer/CodeCheckbox" to="." method="_on_code_checkbox_toggled" binds= [2]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer2/VBoxContainer/BackButton" to="." method="_on_back_button_pressed" binds= [2]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer2/VBoxContainer/NextButton" to="." method="_on_next_button_pressed" binds= [2]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer3/VBoxContainer/IncludeCheckbox" to="." method="_on_include_checkbox_toggled" binds= [3]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer3/VBoxContainer/CodeCheckbox" to="." method="_on_code_checkbox_toggled" binds= [3]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer3/VBoxContainer/BackButton" to="." method="_on_back_button_pressed" binds= [3]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer3/VBoxContainer/NextButton" to="." method="_on_next_button_pressed" binds= [3]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer4/VBoxContainer/IncludeCheckbox" to="." method="_on_include_checkbox_toggled" binds= [4]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer4/VBoxContainer/CodeCheckbox" to="." method="_on_code_checkbox_toggled" binds= [4]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer4/VBoxContainer/BackButton" to="." method="_on_back_button_pressed" binds= [4]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer4/VBoxContainer/NextButton" to="." method="_on_next_button_pressed" binds= [4]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer5/VBoxContainer/IncludeCheckbox" to="." method="_on_include_checkbox_toggled" binds= [5]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer5/VBoxContainer/CodeCheckbox" to="." method="_on_code_checkbox_toggled" binds= [5]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer5/VBoxContainer/BackButton" to="." method="_on_back_button_pressed" binds= [5]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer5/VBoxContainer/NextButton" to="." method="_on_next_button_pressed" binds= [5]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer6/VBoxContainer/IncludeCheckbox" to="." method="_on_include_checkbox_toggled" binds= [6]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer6/VBoxContainer/CodeCheckbox" to="." method="_on_code_checkbox_toggled" binds= [6]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer6/VBoxContainer/BackButton" to="." method="_on_back_button_pressed" binds= [6]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer6/VBoxContainer/NextButton" to="." method="_on_next_button_pressed" binds= [6]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer7/VBoxContainer/IncludeCheckbox" to="." method="_on_include_checkbox_toggled" binds= [7]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer7/VBoxContainer/CodeCheckbox" to="." method="_on_code_checkbox_toggled" binds= [7]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer7/VBoxContainer/BackButton" to="." method="_on_back_button_pressed" binds= [7]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer7/VBoxContainer/NextButton" to="." method="_on_next_button_pressed" binds= [7]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer8/VBoxContainer/IncludeCheckbox" to="." method="_on_include_checkbox_toggled" binds= [8]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer8/VBoxContainer/CodeCheckbox" to="." method="_on_code_checkbox_toggled" binds= [8]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer8/VBoxContainer/BackButton" to="." method="_on_back_button_pressed" binds= [8]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer8/VBoxContainer/NextButton" to="." method="_on_next_button_pressed" binds= [8]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer9/VBoxContainer/IncludeCheckbox" to="." method="_on_include_checkbox_toggled" binds= [9]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer9/VBoxContainer/CodeCheckbox" to="." method="_on_code_checkbox_toggled" binds= [9]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer9/VBoxContainer/BackButton" to="." method="_on_back_button_pressed" binds= [9]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer9/VBoxContainer/NextButton" to="." method="_on_next_button_pressed" binds= [9]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer10/VBoxContainer/IncludeCheckbox" to="." method="_on_include_checkbox_toggled" binds= [10]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer10/VBoxContainer/CodeCheckbox" to="." method="_on_code_checkbox_toggled" binds= [10]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer10/VBoxContainer/BackButton" to="." method="_on_back_button_pressed" binds= [10]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer10/VBoxContainer/NextButton" to="." method="_on_next_button_pressed" binds= [10]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer11/VBoxContainer/IncludeCheckbox" to="." method="_on_include_checkbox_toggled" binds= [11]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer11/VBoxContainer/CodeCheckbox" to="." method="_on_code_checkbox_toggled" binds= [11]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer11/VBoxContainer/BackButton" to="." method="_on_back_button_pressed" binds= [11]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer11/VBoxContainer/NextButton" to="." method="_on_next_button_pressed" binds= [11]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer12/VBoxContainer/IncludeCheckbox" to="." method="_on_include_checkbox_toggled" binds= [12]]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer12/VBoxContainer/CodeCheckbox" to="." method="_on_code_checkbox_toggled" binds= [12]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer12/VBoxContainer/BackButton" to="." method="_on_back_button_pressed" binds= [12]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScrollContainer/SpriteSelector/Layer12/VBoxContainer/NextButton" to="." method="_on_next_button_pressed" binds= [12]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/SetArgs" to="." method="_on_set_args_pressed"]
+[connection signal="meta_clicked" from="HBoxContainer/VBoxContainer/CodeView/CodeViewLabel" to="HBoxContainer/VBoxContainer/CodeView/CodeViewLabel" method="_on_meta_clicked"]

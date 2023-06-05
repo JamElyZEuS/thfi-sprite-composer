@@ -1,0 +1,35 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="TH:FI Sprite Composer"
+config/name_localized={
+"ru_RU": "Конструктор спрайтов для TH:FI"
+}
+run/main_scene="res://main_window.tscn"
+config/features=PackedStringArray("4.0", "GL Compatibility")
+boot_splash/bg_color=Color(0.0941176, 0.0980392, 0.168627, 1)
+boot_splash/show_image=false
+config/icon="res://icon.svg"
+
+[gui]
+
+theme/custom="res://theme.tres"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://locale.en.translation", "res://locale.ru.translation")
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.156863, 0.164706, 0.309804, 1)
